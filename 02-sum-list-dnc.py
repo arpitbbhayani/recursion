@@ -4,7 +4,8 @@ from typing import List
 def _sum(numbers: List[int]) -> int:
     if len(numbers) == 1:
         return numbers[0]
-    return numbers[0] + _sum(numbers[1:])
+    count = len(numbers)
+    return _sum(numbers[:count//2]) + _sum(numbers[count//2:])
 
 
 def sum_list(numbers: List[int]) -> int:
