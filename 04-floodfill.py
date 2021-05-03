@@ -82,13 +82,9 @@ def flood(x, y):
     _flood(x, y)
 
 
-def flood_all():
-    # randomly shuffle the points
-    random.shuffle(points)
+# randomly shuffle the points
+random.shuffle(points)
 
-    # do flood fill for each hexagon
-    for x, y in points:
-        flood(x, y)
-
-
-flood_all()
+# do flood fill for each hexagon
+for X, Y in points:
+    flood(X, Y)
