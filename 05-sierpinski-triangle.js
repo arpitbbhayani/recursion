@@ -33,8 +33,8 @@ class Triangle {
   }
 }
 
-function drawSierpinskiTriangle(tri, iteration) {
-  if (iteration === level) {
+function drawSierpinskiTriangle(tri, depth) {
+  if (depth === level) {
     return
   }
 
@@ -44,9 +44,9 @@ function drawSierpinskiTriangle(tri, iteration) {
   let tri_0 = new Triangle(m1, m2, m3)
   tri_0.draw()
   
-  drawSierpinskiTriangle(new Triangle(tri.p1, m1, m3), iteration + 1)
-  drawSierpinskiTriangle(new Triangle(tri.p2, m2, m1), iteration + 1)
-  drawSierpinskiTriangle(new Triangle(tri.p3, m3, m2), iteration + 1)
+  drawSierpinskiTriangle(new Triangle(tri.p1, m1, m3), depth + 1)
+  drawSierpinskiTriangle(new Triangle(tri.p2, m2, m1), depth + 1)
+  drawSierpinskiTriangle(new Triangle(tri.p3, m3, m2), depth + 1)
 }
 
 function draw() {
