@@ -12,11 +12,14 @@ function getMidpoint(p1, p2) {
 }
 
 function getRandomColor() {
-  return color(random(100, 150), random(100, 200), random(100, 255))
+  return color(
+	random(0, 255),
+	random(0, 255),
+	random(0, 255)
+  )
 }
 
 function drawTriangle(p1, p2, p3) {
-  noStroke()
   fill(getRandomColor())
   triangle(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y)
 }
