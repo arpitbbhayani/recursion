@@ -50,6 +50,7 @@ if __name__ == '__main__':
     words = [
         'bose',
         'newton',
+        'cooper',
         'ramanujan',
     ]
 
@@ -62,3 +63,4 @@ if __name__ == '__main__':
             for symbol in decomposed_elements:
                 element = elements[symbol]
                 print(f"  - {element['symbol']}: {element['name']}")
+        print('-' * 40)

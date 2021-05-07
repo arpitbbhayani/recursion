@@ -41,6 +41,7 @@ if __name__ == '__main__':
     words = [
         'bose',
         'newton',
+        'cooper',
         'ramanujan',
     ]
 
