@@ -44,10 +44,16 @@ def _get_all_compositions(
     return False
 
 
-def get_all_compositions(word: str) -> Tuple[Tuple[str]]:
-    symbols, results = [], set([])
-    _get_all_compositions(word.lower(), symbols, results)
-    return results
+def get_composition(word: str) -> Tuple[Tuple[str], float]:
+    symbols, compositions = [], set([])
+    _get_all_compositions(word.lower(), symbols, compositions)
+    if not compositions:
+        return None, 0
+    return max(
+        map(lambda composition: (composition, sum(
+            [elements[symbol]['atomic_mass'] for symbol in composition])), compositions),
+        key=lambda entry: entry[1],
+    )
 
 
 if __name__ == '__main__':
@@ -59,14 +65,13 @@ if __name__ == '__main__':
     ]
 
     for in_word in words:
-        compositions = get_all_compositions(in_word)
-        if not compositions:
+        composition, atomic_mass = get_composition(in_word)
+        if not composition:
             print(f"{in_word} is not elementable")
         else:
             print(f"{in_word} is elementable")
-            for index, decomposed_elements in enumerate(compositions):
-                print(f"Composition {index + 1}:")
-                for symbol in decomposed_elements:
-                    element = elements[symbol]
-                    print(f"  - {element['symbol']}: {element['name']}")
+            for symbol in composition:
+                element = elements[symbol]
+                print(f"  - {element['symbol']}: {element['name']}")
+            print(f"this composition has atomic mass of: {atomic_mass}")
         print('-' * 40)

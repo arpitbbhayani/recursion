@@ -59,7 +59,7 @@ if __name__ == '__main__':
         if not decomposed_elements:
             print(f"{in_word} is not elementable")
         else:
-            print(f"{in_word} is elementatble")
+            print(f"{in_word} is elementable")
             for symbol in decomposed_elements:
                 element = elements[symbol]
                 print(f"  - {element['symbol']}: {element['name']}")
