@@ -8,10 +8,10 @@ with open('./data/elements.json') as fp:
 
 
 def _get_all_compositions(
-        word: str, symbols: List[str], results: Set[Tuple[str]]) -> bool:
-    # empty word is elementable
+        word: str, composition: List[str], all_compositions: Set[Tuple[str]]) -> bool:
+    # empty word is chemifyable
     if not word:
-        results.add(tuple(symbols))
+        all_compositions.add(tuple(composition))
 
     # we compute 3 prefixes from the word
     # max length of element symbol is 3 hence we are
@@ -21,32 +21,32 @@ def _get_all_compositions(
     # if prefix can be represented as a symbol (elemantable)
     # remaining word should also be elemntable
     if prefix1 in elements:
-        symbols.append(prefix1)
-        if _get_all_compositions(word[1:], symbols, results):
+        composition.append(prefix1)
+        if _get_all_compositions(word[1:], composition, all_compositions):
             pass
         else:
-            symbols.pop()
+            composition.pop()
 
     if prefix2 in elements:
-        symbols.append(prefix2)
-        if _get_all_compositions(word[2:], symbols, results):
+        composition.append(prefix2)
+        if _get_all_compositions(word[2:], composition, all_compositions):
             pass
         else:
-            symbols.pop()
+            composition.pop()
 
     if prefix3 in elements:
-        symbols.append(prefix3)
-        if _get_all_compositions(word[3:], symbols, results):
+        composition.append(prefix3)
+        if _get_all_compositions(word[3:], composition, all_compositions):
             pass
         else:
-            symbols.pop()
+            composition.pop()
 
     return False
 
 
 def get_composition(word: str) -> Tuple[Tuple[str], float]:
-    symbols, compositions = [], set([])
-    _get_all_compositions(word.lower(), symbols, compositions)
+    composition, compositions = [], set([])
+    _get_all_compositions(word.lower(), composition, compositions)
     if not compositions:
         return None, 0
 
@@ -70,9 +70,9 @@ if __name__ == '__main__':
     for in_word in words:
         max_composition, max_atomic_mass = get_composition(in_word)
         if not max_composition:
-            print(f"{in_word} is not elementable")
+            print(f"{in_word} is not chemifyable")
         else:
-            print(f"{in_word} is elementable")
+            print(f"{in_word} is chemifyable")
             for symbol in max_composition:
                 element = elements[symbol]
                 print(f"  - {element['symbol']}: {element['name']}")

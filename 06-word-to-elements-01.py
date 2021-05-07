@@ -5,8 +5,8 @@ with open('./data/elements.json') as fp:
     elements = {element['symbol'].lower() for element in data}
 
 
-def _is_elementable(word: str) -> bool:
-    # empty word is elementable
+def _is_chemifyable(word: str) -> bool:
+    # empty word is chemifyable
     if not word:
         return True
 
@@ -18,23 +18,22 @@ def _is_elementable(word: str) -> bool:
     # if prefix can be represented as a symbol (elemantable)
     # remaining word should also be elemntable
     if prefix1 in elements:
-        if _is_elementable(word[1:]):
+        if _is_chemifyable(word[1:]):
             return True
 
     if prefix2 in elements:
-        if _is_elementable(word[2:]):
+        if _is_chemifyable(word[2:]):
             return True
 
     if prefix3 in elements:
-        if _is_elementable(word[3:]):
+        if _is_chemifyable(word[3:]):
             return True
 
     return False
 
 
-def is_elementable(word: str) -> bool:
-    # lower case the word and check if it is elementable
-    return _is_elementable(word.lower())
+def is_chemifyable(word: str) -> bool:
+    return _is_chemifyable(word.lower())
 
 
 if __name__ == '__main__':
@@ -46,5 +45,5 @@ if __name__ == '__main__':
     ]
 
     for in_word in words:
-        result = is_elementable(in_word)
-        print(f"{in_word} {'is' if result else 'is not'} elementable")
+        result = is_chemifyable(in_word)
+        print(f"{in_word} {'is' if result else 'is not'} chemifyable")

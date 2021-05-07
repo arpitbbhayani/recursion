@@ -7,8 +7,8 @@ with open('./data/elements.json') as fp:
     elements = {element['symbol'].lower(): element for element in data}
 
 
-def _get_composition(word: str, symbols: List[str]) -> bool:
-    # empty word is elementable
+def _get_composition(word: str, composition: List[str]) -> bool:
+    # empty word is chemifyable
     if not word:
         return True
 
@@ -20,30 +20,30 @@ def _get_composition(word: str, symbols: List[str]) -> bool:
     # if prefix can be represented as a symbol (elemantable)
     # remaining word should also be elemntable
     if prefix1 in elements:
-        symbols.append(prefix1)
-        if _get_composition(word[1:], symbols):
+        composition.append(prefix1)
+        if _get_composition(word[1:], composition):
             return True
-        symbols.pop()
+        composition.pop()
 
     if prefix2 in elements:
-        symbols.append(prefix2)
-        if _get_composition(word[2:], symbols):
+        composition.append(prefix2)
+        if _get_composition(word[2:], composition):
             return True
-        symbols.pop()
+        composition.pop()
 
     if prefix3 in elements:
-        symbols.append(prefix3)
-        if _get_composition(word[3:], symbols):
+        composition.append(prefix3)
+        if _get_composition(word[3:], composition):
             return True
-        symbols.pop()
+        composition.pop()
 
     return False
 
 
 def get_composition(word: str) -> List[str]:
-    symbols = []
-    _get_composition(word.lower(), symbols)
-    return symbols
+    composition = []
+    _get_composition(word.lower(), composition)
+    return composition
 
 
 if __name__ == '__main__':
@@ -57,9 +57,9 @@ if __name__ == '__main__':
     for in_word in words:
         decomposed_elements = get_composition(in_word)
         if not decomposed_elements:
-            print(f"{in_word} is not elementable")
+            print(f"{in_word} is not chemifyable")
         else:
-            print(f"{in_word} is elementable")
+            print(f"{in_word} is chemifyable")
             for symbol in decomposed_elements:
                 element = elements[symbol]
                 print(f"  - {element['symbol']}: {element['name']}")
